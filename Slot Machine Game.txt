@@ -1,0 +1,98 @@
+Milestone 1.
+
+1.
+CREATE TABLE SLOT1 (
+Reel_1 VarChar(30)	NOT NULL,
+);
+
+CREATE TABLE SLOT2 (
+Reel_2 VarChar(30)	NOT NULL,
+);
+
+CREATE TABLE SLOT3 (
+Reel_3 VarChar(30)	NOT NULL,
+);
+
+2.
+INSERT INTO SLOT1(Reel_1)
+VALUES ('Bell-Fruit');
+
+INSERT INTO SLOT1(Reel_1)
+VALUES ('Cherry');
+
+INSERT INTO SLOT1(Reel_1)
+VALUES ('Orange');
+
+INSERT INTO SLOT2(Reel_2)
+VALUES ('Bell-Fruit');
+
+INSERT INTO SLOT2(Reel_2)
+VALUES ('Cherry');
+
+INSERT INTO SLOT2(Reel_2)
+VALUES ('Orange');
+
+INSERT INTO SLOT3(Reel_3)
+VALUES ('Bell-Fruit');
+
+INSERT INTO SLOT3(Reel_3)
+VALUES ('Cherry');
+
+INSERT INTO SLOT3(Reel_3)
+VALUES ('Orange');
+
+
+Milestone 2.
+
+1.
+SELECT *
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3;
+
+
+Milestone 3.
+
+1.
+SELECT TOP (1) *
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3;
+
+2.
+SELECT *
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3
+ORDER BY Reel_1
+OFFSET 1 ROW
+FETCH NEXT 1 ROW ONLY;
+
+
+Milestone 4
+
+1.
+SELECT TOP (1) *
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3;
+
+2.
+SELECT TOP (1) *, NEWID() as [RandNum]
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3
+ORDER BY RandNum;
+
+3.
+SELECT TOP (1) *
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3
+ORDER BY NEWID();
+
+
+Milestone 5
+
+1.
+SELECT TOP (1) *,
+CASE
+	WHEN Reel_1 = 'Bell-Fruit'
+		 AND Reel_2 = 'Bell-Fruit'
+		 AND Reel_3 = 'Bell-Fruit'
+	THEN 'You Hit the Jackpot!!!'
+	WHEN Reel_1 = 'Cherry'
+		 AND Reel_2 = 'Cherry'
+	THEN 'You won 5 Nickels'
+	ELSE 'You Lost - Try Again?'
+	END as [Result]
+FROM SLOT1 CROSS JOIN SLOT2 CROSS JOIN SLOT3
+ORDER BY NEWID();
